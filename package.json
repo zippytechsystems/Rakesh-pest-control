@@ -14,5 +14,8 @@
     "harsha-pest-control"
   ],
   "author": "Harsha Pest Control",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }

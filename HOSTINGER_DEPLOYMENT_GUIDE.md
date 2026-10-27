@@ -211,3 +211,89 @@ Once deployed, perform these verification tests:
 1. In File Manager, upload your backup `.zip` to `public_html`.
 2. Extract all files, replacing older files.
 3. Ensure `config.php` has the correct database credentials.
+
+---
+
+## STEP 10: Alternative Deployment — Hostinger Node.js Application Setup
+
+If your Hostinger plan includes **Node.js Application Support** (available on Hostinger Cloud Hosting, Business Web Hosting, or Hostinger VPS), you can deploy this project using its high-performance built-in Node.js server (`server.js` / `serve.js`).
+
+### Option A: Deploy via Hostinger hPanel Node.js Selector
+
+1. **Upload or Git Clone Project Files:**
+   - In hPanel, go to **Advanced** -> **Git**.
+   - Set Repository: `https://github.com/zippytechsystems/Rakesh-pest-control.git`
+   - Set Branch: `main`
+   - Target Directory: `public_html` (or a dedicated app folder).
+   - Click **Create & Pull**.
+2. **Open Hostinger Node.js Manager:**
+   - In hPanel, search for **Node.js** (under **Advanced** or **Websites**).
+   - Click **Create Application** (or **Setup Node.js App**).
+3. **Configure the Node.js Application Settings:**
+   - **Node.js Version:** Select `20.x` or `18.x` (LTS recommended).
+   - **Application Mode:** `Production`
+   - **Application Root:** `/home/u123456789/domains/yourdomain.com/public_html`
+   - **Application Startup File:** `server.js` (or `serve.js`)
+   - **Application URL:** Select your domain (e.g. `yourdomain.com`).
+4. **Environment Variables:**
+   - Hostinger's web server (Phusion Passenger / LiteSpeed Node runner) automatically injects the assigned `PORT`. `server.js` reads `process.env.PORT` automatically with fallback.
+   - You can optionally add:
+     - `NODE_ENV` = `production`
+5. **Start Application:**
+   - Click **Run / Start App**.
+   - Your site will now be live with both static frontend (`index.html`) and all `/api/*` endpoints!
+
+---
+
+### Option B: Deploy on Hostinger VPS (Ubuntu / Debian + PM2)
+
+If using a **Hostinger VPS**:
+
+1. **SSH into your VPS:**
+   ```bash
+   ssh root@your_vps_ip
+   ```
+2. **Install Node.js & PM2:**
+   ```bash
+   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+   sudo apt-get install -y nodejs
+   sudo npm install -g pm2
+   ```
+3. **Clone the GitHub Repository:**
+   ```bash
+   cd /var/www
+   git clone https://github.com/zippytechsystems/Rakesh-pest-control.git harsha-pest-control
+   cd harsha-pest-control
+   ```
+4. **Start the Application with PM2 Process Manager:**
+   ```bash
+   pm2 start server.js --name "harsha-pest-control" --env production
+   pm2 save
+   pm2 startup
+   ```
+5. **Configure Nginx Reverse Proxy (`/etc/nginx/sites-available/harshapestcontrol`):**
+   ```nginx
+   server {
+       listen 80;
+       server_name yourdomain.com www.yourdomain.com;
+
+       location / {
+           proxy_pass http://127.0.0.1:5173;
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection 'upgrade';
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+           proxy_cache_bypass $http_upgrade;
+       }
+   }
+   ```
+6. **Enable Site & Install Free SSL:**
+   ```bash
+   sudo ln -s /etc/nginx/sites-available/harshapestcontrol /etc/nginx/sites-enabled/
+   sudo nginx -t && sudo systemctl reload nginx
+   sudo apt install certbot python3-certbot-nginx -y
+   sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+   ```
