@@ -1,12 +1,13 @@
 # =====================================================================
-# Harsha Pest Control - Hostinger Apache / LiteSpeed Configuration
+# Harsha Pest Control - Static Website Apache / LiteSpeed Configuration
 # =====================================================================
 
-# 1. Prevent Directory Indexing (Security)
+# 1. Default Document & Prevent Directory Indexing
+DirectoryIndex index.html
 Options -Indexes
 
 # 2. Block Direct Access to Sensitive Files and Directories
-<FilesMatch "^(config\.php|config\.example\.php|schema\.sql|\.env|\.git.*|composer\..*)$">
+<FilesMatch "^(schema\.sql|\.env|\.git.*|package\.json)$">
     <IfModule !mod_authz_core.c>
         Order allow,deny
         Deny from all
@@ -15,21 +16,6 @@ Options -Indexes
         Require all denied
     </IfModule>
 </FilesMatch>
-
-# Prevent access to includes folder directly
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-
-    # Block direct URL access to includes folder
-    RewriteRule ^includes/ - [F,L]
-
-    # Clean URLs: Route clean paths to PHP pages or index.php
-    # e.g., /services -> services.php or index.php?page=services
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?page=$1 [L,QSA]
-</IfModule>
 
 # 3. Security HTTP Response Headers
 <IfModule mod_headers.c>
@@ -56,4 +42,5 @@ Options -Indexes
 </IfModule>
 
 # 6. Custom 404 Error Page
-ErrorDocument 404 /404.php
+ErrorDocument 404 /404.html
+
