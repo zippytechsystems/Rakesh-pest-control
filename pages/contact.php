@@ -8,6 +8,11 @@ defined('HARSHA_APP') or define('HARSHA_APP', true);
 $prefilledService = trim($_GET['service'] ?? '');
 $prefilledLocality = trim($_GET['locality'] ?? '');
 $statusSuccess = (isset($_GET['status']) && $_GET['status'] === 'success');
+
+$primaryPhone    = $primaryPhone ?? get_setting('primary_phone', '63052 35360');
+$secondaryPhone  = $secondaryPhone ?? get_setting('secondary_phone', '88979 06391');
+$whatsappNumber  = $whatsappNumber ?? get_setting('whatsapp_number', '6305235360');
+$whatsappEnabled = $whatsappEnabled ?? (int)get_setting('whatsapp_enabled', '1');
 ?>
 
 <!-- Contact Hero Header -->

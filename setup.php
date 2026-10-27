@@ -26,8 +26,9 @@ try {
     $pdo = get_db_connection();
     
     // Check if tables exist
-    $checkTable = $pdo->query("SHOW TABLES LIKE 'admin_users'")->fetch();
-    if (!$checkTable) {
+    try {
+        $pdo->query("SELECT 1 FROM admin_users LIMIT 1");
+    } catch (Exception $e) {
         die("Error: Table 'admin_users' does not exist yet. Please import 'schema.sql' using Hostinger phpMyAdmin before running setup.");
     }
 
@@ -69,7 +70,7 @@ if (!$isLocked && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
             try {
-                $stmt = $pdo->prepare("INSERT INTO admin_users (username, email, password_hash, created_at) VALUES (:user, :email, :hash, NOW())");
+                $stmt = $pdo->prepare("INSERT INTO admin_users (username, email, password_hash, created_at) VALUES (:user, :email, :hash, CURRENT_TIMESTAMP)");
                 $stmt->execute([
                     ':user'  => $username,
                     ':email' => $email,

@@ -105,11 +105,11 @@ try {
             :locality, 
             :message, 
             1, 
-            NOW(), 
+            CURRENT_TIMESTAMP, 
             :ip, 
             :ua, 
             'new', 
-            NOW()
+            CURRENT_TIMESTAMP
         )
     ");
 

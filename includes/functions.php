@@ -13,16 +13,18 @@ require_once __DIR__ . '/db.php';
  */
 function init_session() {
     if (session_status() === PHP_SESSION_NONE) {
-        $cookieParams = [
-            'lifetime' => 7200, // 2 hours
-            'path'     => '/',
-            'domain'   => '',
-            'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
-            'httponly' => true,
-            'samesite' => 'Lax'
-        ];
-        session_set_cookie_params($cookieParams);
-        session_start();
+        if (!headers_sent()) {
+            $cookieParams = [
+                'lifetime' => 7200, // 2 hours
+                'path'     => '/',
+                'domain'   => '',
+                'secure'   => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'),
+                'httponly' => true,
+                'samesite' => 'Lax'
+            ];
+            session_set_cookie_params($cookieParams);
+        }
+        @session_start();
     }
 }
 
@@ -105,7 +107,7 @@ function check_rate_limit($action, $max_attempts = 5, $window_minutes = 15) {
         }
 
         // Record this attempt
-        $insStmt = $pdo->prepare("INSERT INTO rate_limits (ip_address, action, created_at) VALUES (:ip, :action, NOW())");
+        $insStmt = $pdo->prepare("INSERT INTO rate_limits (ip_address, action, created_at) VALUES (:ip, :action, CURRENT_TIMESTAMP)");
         $insStmt->execute([
             ':ip'     => $ip,
             ':action' => $action
@@ -120,12 +122,12 @@ function check_rate_limit($action, $max_attempts = 5, $window_minutes = 15) {
 }
 
 /**
- * Get single setting with fallback
+ * Get single setting with fallback and optional cache refresh
  */
-function get_setting($key, $default = '') {
+function get_setting($key, $default = '', $refresh = false) {
     static $cache = null;
 
-    if ($cache === null) {
+    if ($refresh || $cache === null) {
         try {
             $pdo = get_db_connection();
             $stmt = $pdo->query("SELECT setting_key, setting_value FROM settings");
@@ -138,6 +140,10 @@ function get_setting($key, $default = '') {
         }
     }
 
+    if ($key === null) {
+        return null;
+    }
+
     return $cache[$key] ?? $default;
 }
 
@@ -146,16 +152,27 @@ function get_setting($key, $default = '') {
  */
 function update_setting($key, $value) {
     $pdo = get_db_connection();
-    $stmt = $pdo->prepare("
-        INSERT INTO settings (setting_key, setting_value) 
-        VALUES (:key, :val) 
-        ON DUPLICATE KEY UPDATE setting_value = :val2
-    ");
-    return $stmt->execute([
+    $driver = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+    if ($driver === 'sqlite') {
+        $stmt = $pdo->prepare("
+            INSERT INTO settings (setting_key, setting_value) 
+            VALUES (:key, :val) 
+            ON CONFLICT(setting_key) DO UPDATE SET setting_value = :val2
+        ");
+    } else {
+        $stmt = $pdo->prepare("
+            INSERT INTO settings (setting_key, setting_value) 
+            VALUES (:key, :val) 
+            ON DUPLICATE KEY UPDATE setting_value = :val2
+        ");
+    }
+    $res = $stmt->execute([
         ':key'  => $key,
         ':val'  => $value,
         ':val2' => $value
     ]);
+    get_setting(null, '', true); // Invalidate in-memory cache
+    return $res;
 }
 
 /**
@@ -295,10 +312,11 @@ function get_flash() {
 /**
  * Base URL helper
  */
-function base_url($path = '') {
+function base_url($path = '', $refresh = false) {
     static $base = null;
 
-    if ($base === null) {
+    if ($refresh || $base === null) {
+        $base = null;
         $configFile = __DIR__ . '/../config.php';
         if (file_exists($configFile)) {
             $config = require $configFile;
@@ -312,7 +330,22 @@ function base_url($path = '') {
             $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
             $scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '');
             $scriptDir = str_replace('\\', '/', $scriptDir);
-            $scriptDir = rtrim($scriptDir, '/');
+
+            // Strip subdirectories like /admin, /pages, /includes if called from within them
+            if (substr($scriptDir, -6) === '/admin') {
+                $scriptDir = substr($scriptDir, 0, -6);
+            } elseif (substr($scriptDir, -6) === '/pages') {
+                $scriptDir = substr($scriptDir, 0, -6);
+            } elseif (substr($scriptDir, -9) === '/includes') {
+                $scriptDir = substr($scriptDir, 0, -9);
+            }
+
+            if ($scriptDir === '/' || $scriptDir === '.' || $scriptDir === '') {
+                $scriptDir = '';
+            } else {
+                $scriptDir = '/' . trim($scriptDir, '/');
+            }
+
             $base = $protocol . $host . $scriptDir;
         }
     }

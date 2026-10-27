@@ -3,7 +3,8 @@
  * Harsha Pest Control - About Us Page Content
  */
 
-defined('HARSHA_APP') or define('HARSHA_APP', true);
+$primaryPhone   = $primaryPhone ?? get_setting('primary_phone', '63052 35360');
+$secondaryPhone = $secondaryPhone ?? get_setting('secondary_phone', '88979 06391');
 ?>
 
 <!-- About Hero Header -->

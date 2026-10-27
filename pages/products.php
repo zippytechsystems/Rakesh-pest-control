@@ -6,6 +6,10 @@
 defined('HARSHA_APP') or define('HARSHA_APP', true);
 
 $products = get_active_products();
+$primaryPhone    = $primaryPhone ?? get_setting('primary_phone', '63052 35360');
+$secondaryPhone  = $secondaryPhone ?? get_setting('secondary_phone', '88979 06391');
+$whatsappNumber  = $whatsappNumber ?? get_setting('whatsapp_number', '6305235360');
+$whatsappEnabled = $whatsappEnabled ?? (int)get_setting('whatsapp_enabled', '1');
 ?>
 
 <!-- Products Hero Header -->
@@ -38,19 +42,19 @@ $products = get_active_products();
 <section class="section section-products-catalog">
     <div class="container">
         <div class="products-grid-catalog">
-            <?php foreach ($products as $p): ?>
-            <div class="product-item-card" id="<?= e($p['slug']) ?>">
+            <?php foreach ($products as $prod): ?>
+            <div class="product-item-card" id="<?= e($prod['slug']) ?>">
                 <div class="product-card-top">
-                    <span class="product-category-pill"><?= e($p['category']) ?></span>
-                    <span class="product-stock-pill <?= $p['is_available'] ? 'stock-in' : 'stock-out' ?>">
-                        <?= $p['is_available'] ? 'Counter Available' : 'Call to Check Stock' ?>
+                    <span class="product-category-pill"><?= e($prod['category']) ?></span>
+                    <span class="product-stock-pill <?= $prod['is_available'] ? 'stock-in' : 'stock-out' ?>">
+                        <?= $prod['is_available'] ? 'Counter Available' : 'Call to Check Stock' ?>
                     </span>
                 </div>
 
-                <h2 class="product-item-title"><?= e($p['name']) ?></h2>
-                <div class="product-item-price"><?= e($p['price_display']) ?></div>
+                <h2 class="product-item-title"><?= e($prod['name']) ?></h2>
+                <div class="product-item-price"><?= e($prod['price_display']) ?></div>
                 
-                <p class="product-item-desc"><?= nl2br(e($p['description'])) ?></p>
+                <p class="product-item-desc"><?= nl2br(e($prod['description'])) ?></p>
 
                 <div class="product-card-bottom">
                     <a href="<?= phone_href($primaryPhone) ?>" class="btn btn-primary btn-block">
@@ -59,7 +63,7 @@ $products = get_active_products();
                     </a>
 
                     <?php if ($whatsappEnabled && !empty($whatsappNumber)): ?>
-                    <a href="<?= whatsapp_url($whatsappNumber, 'Hello Rakesh garu, I want to inquire about availability of product: ' . $p['name'] . ' (' . $p['price_display'] . ')') ?>" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block">
+                    <a href="<?= whatsapp_url($whatsappNumber, 'Hello Rakesh garu, I want to inquire about availability of product: ' . $prod['name'] . ' (' . $prod['price_display'] . ')') ?>" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block">
                         <span>Check Stock on WhatsApp</span>
                     </a>
                     <?php endif; ?>

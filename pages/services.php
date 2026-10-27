@@ -6,6 +6,10 @@
 defined('HARSHA_APP') or define('HARSHA_APP', true);
 
 $services = get_active_services();
+$primaryPhone    = $primaryPhone ?? get_setting('primary_phone', '63052 35360');
+$secondaryPhone  = $secondaryPhone ?? get_setting('secondary_phone', '88979 06391');
+$whatsappNumber  = $whatsappNumber ?? get_setting('whatsapp_number', '6305235360');
+$whatsappEnabled = $whatsappEnabled ?? (int)get_setting('whatsapp_enabled', '1');
 ?>
 
 <!-- Services Hero Header -->
@@ -38,25 +42,25 @@ $services = get_active_services();
 <section class="section section-services-list">
     <div class="container">
         <div class="services-detail-stack">
-            <?php foreach ($services as $s): ?>
-            <article class="service-detail-card" id="<?= e($s['slug']) ?>">
+            <?php foreach ($services as $srv): ?>
+            <article class="service-detail-card" id="<?= e($srv['slug']) ?>">
                 <div class="service-detail-grid">
                     <div class="service-detail-main">
                         <div class="service-tag-row">
-                            <span class="warranty-badge">🛡️ <?= e($s['warranty_terms']) ?></span>
-                            <span class="free-badge">🎁 <?= e($s['free_service_offer']) ?></span>
+                            <span class="warranty-badge">🛡️ <?= e($srv['warranty_terms']) ?></span>
+                            <span class="free-badge">🎁 <?= e($srv['free_service_offer']) ?></span>
                         </div>
-                        <h2 class="service-detail-title"><?= e($s['name']) ?></h2>
-                        <p class="service-detail-desc"><?= nl2br(e($s['description'])) ?></p>
+                        <h2 class="service-detail-title"><?= e($srv['name']) ?></h2>
+                        <p class="service-detail-desc"><?= nl2br(e($srv['description'])) ?></p>
 
                         <div class="service-detail-highlights">
                             <div class="highlight-item">
                                 <span class="hl-label">Indicative Pricing:</span>
-                                <span class="hl-value hl-price"><?= e($s['indicative_price']) ?></span>
+                                <span class="hl-value hl-price"><?= e($srv['indicative_price']) ?></span>
                             </div>
                             <div class="highlight-item">
                                 <span class="hl-label">Scope Notice:</span>
-                                <span class="hl-value"><?= e($s['price_note']) ?></span>
+                                <span class="hl-value"><?= e($srv['price_note']) ?></span>
                             </div>
                         </div>
                     </div>
@@ -71,7 +75,7 @@ $services = get_active_services();
                                 <span>Call <?= e($primaryPhone) ?></span>
                             </a>
                             
-                            <a href="<?= base_url('contact.php?service=' . urlencode($s['name'])) ?>" class="btn btn-outline btn-block">
+                            <a href="<?= base_url('contact.php?service=' . urlencode($srv['name'])) ?>" class="btn btn-outline btn-block">
                                 <span>Book Inspection</span>
                             </a>
                         </div>

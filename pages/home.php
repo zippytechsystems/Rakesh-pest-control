@@ -7,6 +7,11 @@ defined('HARSHA_APP') or define('HARSHA_APP', true);
 
 $services = get_active_services();
 $products = get_active_products();
+
+$primaryPhone    = $primaryPhone ?? get_setting('primary_phone', '63052 35360');
+$secondaryPhone  = $secondaryPhone ?? get_setting('secondary_phone', '88979 06391');
+$whatsappNumber  = $whatsappNumber ?? get_setting('whatsapp_number', '6305235360');
+$whatsappEnabled = $whatsappEnabled ?? (int)get_setting('whatsapp_enabled', '1');
 ?>
 
 <!-- Hero Section -->
