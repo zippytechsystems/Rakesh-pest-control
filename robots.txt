@@ -18,4 +18,4 @@ Disallow: /schema.sql
 Disallow: /submit-enquiry.php
 
 # Sitemap index
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://harshapestcontrol.store/sitemap.xml

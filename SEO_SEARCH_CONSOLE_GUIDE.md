@@ -12,7 +12,7 @@
 1. Go to [search.google.com/search-console](https://search.google.com/search-console) and sign in with your primary Google account.
 2. In the top-left dropdown, select **Add property**.
 3. Choose **Domain** property (recommended):
-   - Enter your bare domain (e.g., `harshapestcontrol.com`).
+   - Enter your bare domain (e.g., `harshapestcontrol.store`).
    - Google will provide a **TXT record** (e.g. `google-site-verification=abc123xyz...`).
 4. In Hostinger hPanel -> **DNS Zone Editor**:
    - Add a new **TXT record**:
@@ -37,14 +37,14 @@
 
 ### Step 1.3: Inspect URL & Request Initial Indexing
 1. In the top search bar of Search Console (*"Inspect any URL in '...' "*), enter your live homepage URL:
-   `https://yourdomain.com/`
+   `https://harshapestcontrol.store/`
 2. Wait for Google to test the URL.
 3. Click the **Request Indexing** button.
 4. Repeat this for your key service and area pages:
-   - `https://yourdomain.com/services.php`
-   - `https://yourdomain.com/products.php`
-   - `https://yourdomain.com/areas.php`
-   - `https://yourdomain.com/contact.php`
+   - `https://harshapestcontrol.store/services.php`
+   - `https://harshapestcontrol.store/products.php`
+   - `https://harshapestcontrol.store/areas.php`
+   - `https://harshapestcontrol.store/contact.php`
 
 ---
 
@@ -83,7 +83,7 @@ To build strong local search signals, the details in Google Business Profile mus
 | **City** | `Hyderabad` |
 | **State** | `Telangana` |
 | **PIN Code** | `500076` |
-| **Website URL** | `https://yourdomain.com` |
+| **Website URL** | `https://harshapestcontrol.store` |
 
 ---
 
@@ -122,6 +122,6 @@ The website includes embedded `LocalBusiness` JSON-LD schema with only verified 
 
 ### How to Test:
 1. Visit the [Google Rich Results Test](https://search.google.com/test/rich-results).
-2. Enter `https://yourdomain.com/` and click **Test URL**.
+2. Enter `https://harshapestcontrol.store/` and click **Test URL**.
 3. Verify that the crawler detects the `LocalBusiness` entity without errors.
 4. Also test on [validator.schema.org](https://validator.schema.org/) to confirm all address, phone, and areaServed attributes parse cleanly.

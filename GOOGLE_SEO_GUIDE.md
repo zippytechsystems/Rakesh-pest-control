@@ -3,8 +3,8 @@
 **Owner / Operator:** Rakesh (20 Years Experience)  
 **Operating Base:** Snehapuri Colony, Behind HDFC Bank, Nacharam, Hyderabad – 500 076  
 **Primary Contact:** 63052 35360 | **Alternative:** 88979 06391  
-**Website URL:** `https://harshapestcontrol.in/`  
-**Sitemap URL:** `https://harshapestcontrol.in/sitemap.xml`
+**Website URL:** `https://harshapestcontrol.store/`  
+**Sitemap URL:** `https://harshapestcontrol.store/sitemap.xml`
 
 ---
 
@@ -63,7 +63,7 @@ Google Business Profile is the #1 tool for appearing on Google Maps and in local
 - **Status:** **[Owner Action Required]**
 - **Primary Phone Number:** `063052 35360` (or `+91 63052 35360`)
 - **Alternative Phone Number:** `088979 06391` (or `+91 88979 06391`)
-- **Website URL:** Enter the live website URL (e.g. `https://harshapestcontrol.in/`).
+- **Website URL:** Enter the live website URL (e.g. `https://harshapestcontrol.store/`).
 - **Operating Hours:** Enter the actual working hours once confirmed with Rakesh (e.g., Monday – Sunday: 8:00 AM – 8:00 PM).
 
 ### Step 5: Complete Verification
@@ -105,7 +105,7 @@ Google Search Console ensures that Google's search crawlers discover, crawl, and
 - **Action:**
   1. Go to [search.google.com/search-console](https://search.google.com/search-console/).
   2. Click **Add Property**.
-  3. Select **Domain** (e.g. `harshapestcontrol.in`) or **URL Prefix** (`https://harshapestcontrol.in`).
+  3. Select **Domain** (e.g. `harshapestcontrol.store`) or **URL Prefix** (`https://harshapestcontrol.store`).
 
 ### Step 2: Verify Website Ownership
 - **Status:** **[Owner Action Required]**
@@ -131,9 +131,9 @@ Google Search Console ensures that Google's search crawlers discover, crawl, and
 ### Step 4: Request Immediate Indexing with URL Inspection
 - **Status:** **[Owner Action Required]**
 - **Action:**
-  1. In the top search bar ("Inspect any URL in harshapestcontrol.in"), enter:
+  1. In the top search bar ("Inspect any URL in harshapestcontrol.store"), enter:
      ```
-     https://harshapestcontrol.in/
+     https://harshapestcontrol.store/
      ```
   2. Press **Enter**. Search Console will fetch the current index status.
   3. Click **Test Live URL** to verify mobile usability and Schema.org structured data.
@@ -141,7 +141,7 @@ Google Search Console ensures that Google's search crawlers discover, crawl, and
 
 ### Step 5: Test Schema.org Structured Data
 - Open [validator.schema.org](https://validator.schema.org/) or [Google Rich Results Test](https://search.google.com/test/rich-results).
-- Enter `https://harshapestcontrol.in/` (or paste the contents of `index.html`).
+- Enter `https://harshapestcontrol.store/` (or paste the contents of `index.html`).
 - Verify that `LocalBusiness` / `HomeAndConstructionBusiness` structured data is detected with 0 errors:
   - Correct Name: `Harsha Pest Control`
   - Coordinates: `17.4325, 78.5583`
@@ -161,7 +161,7 @@ Once indexed, monitor performance weekly in Google Search Console:
    - Check top **Queries**:
      - Look for queries like "pest control nacharam", "pest control habsiguda", "termite treatment 500076", "cockroach spray nacharam".
 2. **Coverage & Pages:**
-   - Ensure `https://harshapestcontrol.in/` displays under **Indexed** pages with no crawl errors.
+   - Ensure `https://harshapestcontrol.store/` displays under **Indexed** pages with no crawl errors.
 3. **Mobile Usability:**
    - Confirm that the page passes Google's Core Web Vitals and Mobile Usability checks (zero text overlap, comfortable tap targets, fast LCP).
 
@@ -177,7 +177,7 @@ Once indexed, monitor performance weekly in Google Search Console:
 | 4 | Upload Real Storefront & Equipment Photos | **[Owner Action Required]** | GBP Media Tab |
 | 5 | Verify Domain in Google Search Console | **[Owner Action Required]** | GSC Verification Screen |
 | 6 | Submit `sitemap.xml` | **[Owner Action Required]** | GSC Sitemaps Tab |
-| 7 | Request Indexing for `https://harshapestcontrol.in/` | **[Owner Action Required]** | GSC URL Inspection |
+| 7 | Request Indexing for `https://harshapestcontrol.store/` | **[Owner Action Required]** | GSC URL Inspection |
 | 8 | Confirm designated WhatsApp number (63052 35360 vs 88979 06391) | **[Owner Action Required]** | Phone Setup |
 | 9 | Validate Indicative Prices & 20-Year Experience with Rakesh | **[Owner Action Required]** | Direct Confirmation |
 

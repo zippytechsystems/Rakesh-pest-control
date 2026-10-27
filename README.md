@@ -116,7 +116,7 @@ For full, beginner-friendly instructions, refer to [`HOSTINGER_DEPLOYMENT_GUIDE.
 3. **Import Database:** In phpMyAdmin, select your database -> click **Import** -> select [`schema.sql`](./schema.sql) -> click **Import**.
 4. **Configure Credentials:** Copy [`config.example.php`](./config.example.php) to `config.php` and enter your database name, user, password, and live domain.
 5. **Upload Files:** Upload all project files to Hostinger's `public_html` directory via File Manager or FTP.
-6. **Run First-Admin Setup:** Open `https://yourdomain.com/setup.php` in your browser, create your master admin account, and then **DELETE `setup.php`** from `public_html`.
+6. **Run First-Admin Setup:** Open `https://harshapestcontrol.store/setup.php` in your browser, create your master admin account, and then **DELETE `setup.php`** from `public_html`.
 7. **Verify & Test:** Visit your site, test the phone links (`63052 35360`), submit an inspection request, and verify it in `/admin/`.
 
 ---

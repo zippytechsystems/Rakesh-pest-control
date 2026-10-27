@@ -66,7 +66,7 @@ async function runTests() {
   // 3. sitemap.xml
   try {
     const res = await makeRequest('/sitemap.xml');
-    if (res.status === 200 && res.body.includes('https://harshapestcontrol.in/')) {
+    if (res.status === 200 && res.body.includes('https://harshapestcontrol.store/')) {
       console.log('✓ GET /sitemap.xml -> 200 OK (Canonical URL verified)');
     } else {
       console.error('✗ GET /sitemap.xml failed', res.status);

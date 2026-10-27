@@ -33,7 +33,7 @@ Before beginning, check your Hostinger plan settings in hPanel:
 - **Hosting Type:** Hostinger Single, Premium, Business, or Cloud Hosting.
 - **PHP Version:** PHP 8.1, 8.2, or 8.3 (Go to **hPanel -> Advanced -> PHP Configuration** to verify/switch to PHP 8.2).
 - **Database Engine:** MySQL 5.7+ / MySQL 8.0 or MariaDB 10.3+ (all Hostinger plans natively support this).
-- **Document Root:** Usually `/home/u123456789/domains/yourdomain.com/public_html` (or simply `public_html`).
+- **Document Root:** Usually `/home/u123456789/domains/harshapestcontrol.store/public_html` (or simply `public_html`).
 
 ---
 
@@ -94,7 +94,7 @@ Tables created:
    ```php
    'app' => [
        'env'       => 'production',
-       'base_url'  => 'https://yourdomain.com', // Replace with your live HTTPS domain
+       'base_url'  => 'https://harshapestcontrol.store', // Replace with your live HTTPS domain
        'setup_key' => 'ChooseARandomSecretPassphraseHere123!', // Used once in setup.php
        'timezone'  => 'Asia/Kolkata',
    ],
@@ -151,7 +151,7 @@ You can upload using **Hostinger File Manager** (recommended for simplicity) or 
 ## STEP 7: Run First-Admin Setup & Lock Route
 
 1. Open your browser and navigate to:  
-   `https://yourdomain.com/setup.php`
+   `https://harshapestcontrol.store/setup.php`
 2. You will see the **Create Initial Administrator** form.
 3. If you configured a `setup_key` in `config.php`, enter it.
 4. Choose an **Admin Username** (e.g. `rakesh_admin`) and enter a **Strong Password** (minimum 8 characters).
@@ -170,7 +170,7 @@ Once deployed, perform these verification tests:
 
 | Test Item | What to Check | Expected Result |
 | :--- | :--- | :--- |
-| **Home Page** | Visit `https://yourdomain.com/` | Loads fast with hero, 20 yrs badge, indicative pricing, and services |
+| **Home Page** | Visit `https://harshapestcontrol.store/` | Loads fast with hero, 20 yrs badge, indicative pricing, and services |
 | **Direct Call Links** | Tap `63052 35360` and `88979 06391` on mobile | Prompts phone dialer with `+916305235360` |
 | **Pest Services** | Visit `/services.php` | 6 service cards display indicative prices and warranty tags |
 | **Products Page** | Visit `/products.php` | 5 products display prices and "Call to Order" buttons |
@@ -232,9 +232,9 @@ If your Hostinger plan includes **Node.js Application Support** (available on Ho
 3. **Configure the Node.js Application Settings:**
    - **Node.js Version:** Select `20.x` or `18.x` (LTS recommended).
    - **Application Mode:** `Production`
-   - **Application Root:** `/home/u123456789/domains/yourdomain.com/public_html`
+   - **Application Root:** `/home/u123456789/domains/harshapestcontrol.store/public_html`
    - **Application Startup File:** `server.js` (or `serve.js`)
-   - **Application URL:** Select your domain (e.g. `yourdomain.com`).
+   - **Application URL:** Select your domain (e.g. `harshapestcontrol.store`).
 4. **Environment Variables:**
    - Hostinger's web server (Phusion Passenger / LiteSpeed Node runner) automatically injects the assigned `PORT`. `server.js` reads `process.env.PORT` automatically with fallback.
    - You can optionally add:
@@ -275,7 +275,7 @@ If using a **Hostinger VPS**:
    ```nginx
    server {
        listen 80;
-       server_name yourdomain.com www.yourdomain.com;
+       server_name harshapestcontrol.store www.harshapestcontrol.store;
 
        location / {
            proxy_pass http://127.0.0.1:5173;
@@ -295,5 +295,5 @@ If using a **Hostinger VPS**:
    sudo ln -s /etc/nginx/sites-available/harshapestcontrol /etc/nginx/sites-enabled/
    sudo nginx -t && sudo systemctl reload nginx
    sudo apt install certbot python3-certbot-nginx -y
-   sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+   sudo certbot --nginx -d harshapestcontrol.store -d www.harshapestcontrol.store
    ```
