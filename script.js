@@ -617,7 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Unified Tracker & Admin Modal Controls (GET /api/track/:id, GET /api/stats, PATCH)
+  // 8. Customer Booking & Order Tracker Controls (GET /api/track/:id)
   const trackerModal = document.getElementById('booking-tracker-modal');
   const trackerTriggers = [
     document.getElementById('open-tracker-btn'),
@@ -625,11 +625,6 @@ document.addEventListener('DOMContentLoaded', () => {
   ].filter(Boolean);
   const trackerCloseBtn = document.getElementById('tracker-close-btn');
   const trackerDoneBtn = document.getElementById('tracker-done-btn');
-
-  const tabBtnTrack = document.getElementById('tab-btn-track');
-  const tabBtnAdmin = document.getElementById('tab-btn-admin');
-  const tabPanelTrack = document.getElementById('tab-panel-track');
-  const tabPanelAdmin = document.getElementById('tab-panel-admin');
 
   const trackIdInput = document.getElementById('track-id-input');
   const trackSearchBtn = document.getElementById('track-search-btn');
@@ -645,25 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (trackerCloseBtn) trackerCloseBtn.addEventListener('click', () => closeModal(trackerModal));
   if (trackerDoneBtn) trackerDoneBtn.addEventListener('click', () => closeModal(trackerModal));
 
-  // Tab switching
-  if (tabBtnTrack && tabBtnAdmin) {
-    tabBtnTrack.addEventListener('click', () => {
-      tabBtnTrack.classList.add('active');
-      tabBtnAdmin.classList.remove('active');
-      if (tabPanelTrack) tabPanelTrack.style.display = 'block';
-      if (tabPanelAdmin) tabPanelAdmin.style.display = 'none';
-    });
-
-    tabBtnAdmin.addEventListener('click', async () => {
-      tabBtnAdmin.classList.add('active');
-      tabBtnTrack.classList.remove('active');
-      if (tabPanelTrack) tabPanelTrack.style.display = 'none';
-      if (tabPanelAdmin) tabPanelAdmin.style.display = 'block';
-      await loadAdminDashboard();
-    });
-  }
-
-  // Track search action
+  // Customer Track Search Action
   async function performTrackSearch() {
     if (!trackIdInput || !trackResultContainer) return;
     const ref = trackIdInput.value.trim();
@@ -723,116 +700,5 @@ document.addEventListener('DOMContentLoaded', () => {
         performTrackSearch();
       }
     });
-  }
-
-  // Load Admin Dashboard
-  async function loadAdminDashboard() {
-    try {
-      const [statsRes, enquiriesRes, ordersRes] = await Promise.all([
-        api.getStats(),
-        api.getEnquiries('all', 15),
-        api.getOrders('all', 15)
-      ]);
-
-      const stats = statsRes.stats || {};
-      const elEnq = document.getElementById('stat-enquiries-count');
-      const elPenEnq = document.getElementById('stat-pending-enquiries');
-      const elOrd = document.getElementById('stat-orders-count');
-      const elRev = document.getElementById('stat-order-revenue');
-
-      if (elEnq) elEnq.textContent = stats.totalEnquiries || 0;
-      if (elPenEnq) elPenEnq.textContent = stats.pendingEnquiries || 0;
-      if (elOrd) elOrd.textContent = stats.totalOrders || 0;
-      if (elRev) elRev.textContent = `₹${(stats.totalOrderRevenueEstimated || 0).toLocaleString('en-IN')}`;
-
-      // Render Enquiries List
-      const enqListEl = document.getElementById('admin-enquiries-list');
-      if (enqListEl) {
-        const enquiries = enquiriesRes.enquiries || [];
-        if (enquiries.length === 0) {
-          enqListEl.innerHTML = `<p style="font-size: 0.85rem; color: var(--text-muted);">No enquiries registered yet.</p>`;
-        } else {
-          enqListEl.innerHTML = enquiries.map(e => `
-            <div class="admin-item-card" id="admin-enq-${e.id}">
-              <div class="admin-item-header">
-                <div>
-                  <span class="admin-item-title">${e.name}</span>
-                  <span style="font-size: 0.75rem; color: var(--text-subtle);">(${e.id})</span>
-                </div>
-                <div>
-                  <select class="status-select" data-id="${e.id}" data-type="enquiry">
-                    <option value="pending" ${e.status === 'pending' ? 'selected' : ''}>Pending</option>
-                    <option value="contacted" ${e.status === 'contacted' ? 'selected' : ''}>Contacted</option>
-                    <option value="inspected" ${e.status === 'inspected' ? 'selected' : ''}>Inspected</option>
-                    <option value="completed" ${e.status === 'completed' ? 'selected' : ''}>Completed</option>
-                    <option value="cancelled" ${e.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
-                  </select>
-                </div>
-              </div>
-              <div style="font-size: 0.825rem; color: var(--text-muted);">
-                📞 ${e.phone} | 📍 ${e.colony} | 🛠️ ${e.service} (${e.propertyType})
-              </div>
-            </div>
-          `).join('');
-        }
-      }
-
-      // Render Orders List
-      const ordListEl = document.getElementById('admin-orders-list');
-      if (ordListEl) {
-        const orders = ordersRes.orders || [];
-        if (orders.length === 0) {
-          ordListEl.innerHTML = `<p style="font-size: 0.85rem; color: var(--text-muted);">No product orders registered yet.</p>`;
-        } else {
-          ordListEl.innerHTML = orders.map(o => `
-            <div class="admin-item-card" id="admin-ord-${o.id}">
-              <div class="admin-item-header">
-                <div>
-                  <span class="admin-item-title">${o.customerName}</span>
-                  <span style="font-size: 0.75rem; color: var(--text-subtle);">(${o.id})</span>
-                </div>
-                <div>
-                  <select class="status-select" data-id="${o.id}" data-type="order">
-                    <option value="pending" ${o.status === 'pending' ? 'selected' : ''}>Pending</option>
-                    <option value="confirmed" ${o.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
-                    <option value="dispatched" ${o.status === 'dispatched' ? 'selected' : ''}>Dispatched</option>
-                    <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>Delivered</option>
-                    <option value="cancelled" ${o.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
-                  </select>
-                </div>
-              </div>
-              <div style="font-size: 0.825rem; color: var(--text-muted);">
-                📦 ${o.productName} (Qty: ${o.quantity}) — <strong>${o.totalAmountDisplay}</strong><br>
-                📞 ${o.phone} | 📍 ${o.deliveryAddress}
-              </div>
-            </div>
-          `).join('');
-        }
-      }
-
-      // Attach status change event listeners
-      document.querySelectorAll('.status-select').forEach(sel => {
-        sel.addEventListener('change', async () => {
-          const id = sel.getAttribute('data-id');
-          const type = sel.getAttribute('data-type');
-          const newStatus = sel.value;
-
-          sel.disabled = true;
-          try {
-            if (type === 'enquiry') {
-              await api.updateEnquiryStatus(id, newStatus);
-            } else {
-              await api.updateOrderStatus(id, newStatus);
-            }
-          } catch (err) {
-            alert(`Failed to update status: ${err.message}`);
-          } finally {
-            sel.disabled = false;
-          }
-        });
-      });
-    } catch (err) {
-      console.error('Error loading admin dashboard:', err);
-    }
   }
 });

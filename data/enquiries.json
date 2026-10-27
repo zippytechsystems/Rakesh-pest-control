@@ -1,5 +1,19 @@
 [
   {
+    "id": "ENQ-20261027-2017",
+    "createdAt": "2026-10-27T16:31:03.216Z",
+    "name": "Ramesh Reddy",
+    "phone": "9848012345",
+    "colony": "HMT Nagar, Nacharam 500076",
+    "service": "Cockroach Control (2 BHK Plan ₹1,500*)",
+    "serviceId": "cockroach",
+    "propertyType": "2 BHK Apartment",
+    "notes": "Testing local SEO enquiry registration",
+    "status": "pending",
+    "assignedTo": "Rakesh (Harsha Pest Control)",
+    "source": "Website Online Booking"
+  },
+  {
     "id": "ENQ-20261027-A340",
     "createdAt": "2026-10-27T11:21:54.104Z",
     "name": "Ramesh Reddy",

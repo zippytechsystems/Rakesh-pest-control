@@ -48,6 +48,44 @@ if (!fs.existsSync(ORDERS_FILE)) {
   fs.writeFileSync(ORDERS_FILE, '[]', 'utf8');
 }
 
+// --------------------------------------------------------------------------
+// Admin Authentication & Session Management (HARSHA SYSTEM MANAGEMENT)
+// --------------------------------------------------------------------------
+const ADMIN_CONFIG = {
+  username: 'M.Linga@123',
+  password: 'mr.yadav',
+  name: 'M. Linga',
+  role: 'System Administrator'
+};
+
+// In-memory active sessions: token -> { username, name, role, loginTime }
+const adminSessions = new Map();
+
+function createAdminSession(username) {
+  const token = 'adm_' + crypto.randomBytes(24).toString('hex');
+  adminSessions.set(token, {
+    username,
+    name: ADMIN_CONFIG.name,
+    role: ADMIN_CONFIG.role,
+    loginTime: new Date().toISOString()
+  });
+  return token;
+}
+
+function verifyAdminToken(token) {
+  if (!token) return null;
+  return adminSessions.get(token) || null;
+}
+
+function getBearerToken(req) {
+  const authHeader = req.headers['authorization'] || '';
+  if (authHeader.toLowerCase().startsWith('bearer ')) {
+    return authHeader.substring(7).trim();
+  }
+  return req.headers['x-admin-token'] || '';
+}
+
+
 // Helper: Read JSON file safely
 function readJsonFile(filePath, defaultVal = []) {
   try {
@@ -138,6 +176,63 @@ const server = http.createServer(async (req, res) => {
   // --------------------------------------------------------------------------
   // REST API Routes (/api/*)
   // --------------------------------------------------------------------------
+
+  // 0a. Admin Login (POST /api/admin/login)
+  if (pathname === '/api/admin/login' && method === 'POST') {
+    try {
+      const payload = await parseRequestBody(req);
+      const username = (payload.username || '').trim();
+      const password = (payload.password || '').trim();
+
+      if (username === ADMIN_CONFIG.username && password === ADMIN_CONFIG.password) {
+        const token = createAdminSession(username);
+        return sendJson(res, 200, {
+          success: true,
+          message: 'Admin authentication successful. Welcome, M. Linga.',
+          token,
+          user: {
+            username: ADMIN_CONFIG.username,
+            name: ADMIN_CONFIG.name,
+            role: ADMIN_CONFIG.role
+          }
+        });
+      } else {
+        return sendJson(res, 401, {
+          success: false,
+          error: 'Invalid admin username or password. Please verify credentials.'
+        });
+      }
+    } catch (err) {
+      return sendJson(res, 400, { success: false, error: err.message });
+    }
+  }
+
+  // 0b. Admin Verify Token (GET /api/admin/verify)
+  if (pathname === '/api/admin/verify' && method === 'GET') {
+    const token = getBearerToken(req);
+    const session = verifyAdminToken(token);
+    if (!session) {
+      return sendJson(res, 401, {
+        success: false,
+        authenticated: false,
+        error: 'Unauthorized or session expired.'
+      });
+    }
+    return sendJson(res, 200, {
+      success: true,
+      authenticated: true,
+      user: session
+    });
+  }
+
+  // 0c. Admin Logout (POST /api/admin/logout)
+  if (pathname === '/api/admin/logout' && method === 'POST') {
+    const token = getBearerToken(req);
+    if (token && adminSessions.has(token)) {
+      adminSessions.delete(token);
+    }
+    return sendJson(res, 200, { success: true, message: 'Logged out successfully.' });
+  }
 
   // 1. Health check
   if (pathname === '/api/health' && method === 'GET') {
@@ -529,6 +624,7 @@ const server = http.createServer(async (req, res) => {
   if (method === 'GET') {
     let reqPath = pathname;
     if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
+    if (reqPath === '/admin' || reqPath === '/admin/') reqPath = '/admin.html';
 
     // Prevent directory traversal
     const safePath = path.normalize(reqPath).replace(/^(\.\.[\/\\])+/, '');

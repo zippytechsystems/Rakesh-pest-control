@@ -1,16 +1,19 @@
 const http = require('http');
 
-function makeRequest(path, method = 'GET', body = null) {
+function makeRequest(path, method = 'GET', body = null, extraHeaders = {}) {
   return new Promise((resolve, reject) => {
+    const headers = { ...extraHeaders };
+    if (body) {
+      headers['Content-Type'] = 'application/json';
+      headers['Content-Length'] = Buffer.byteLength(JSON.stringify(body));
+    }
+
     const options = {
       hostname: 'localhost',
       port: 5173,
       path,
       method,
-      headers: body ? {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(JSON.stringify(body))
-      } : {}
+      headers
     };
 
     const req = http.request(options, (res) => {
@@ -173,6 +176,76 @@ async function runTests() {
       }
     } catch (err) {
       console.error('✗ GET /api/track error', err.message);
+      failures++;
+    }
+  }
+
+  // 10. GET /admin -> 200 OK (Admin Portal HTML)
+  try {
+    const res = await makeRequest('/admin');
+    if (res.status === 200 && res.body.includes('HARSHA SYSTEM MANAGEMENT')) {
+      console.log('✓ GET /admin -> 200 OK (Admin Portal rendered)');
+    } else {
+      console.error('✗ GET /admin failed', res.status);
+      failures++;
+    }
+  } catch (err) {
+    console.error('✗ GET /admin error', err.message);
+    failures++;
+  }
+
+  // 11. POST /api/admin/login -> Success with M.Linga@123 / mr.yadav
+  let adminToken = null;
+  try {
+    const res = await makeRequest('/api/admin/login', 'POST', {
+      username: 'M.Linga@123',
+      password: 'mr.yadav'
+    });
+    const json = JSON.parse(res.body);
+    if (res.status === 200 && json.success && json.token && json.user.username === 'M.Linga@123') {
+      adminToken = json.token;
+      console.log('✓ POST /api/admin/login -> 200 OK (Authenticated M.Linga@123)');
+    } else {
+      console.error('✗ POST /api/admin/login failed', res.status, json);
+      failures++;
+    }
+  } catch (err) {
+    console.error('✗ POST /api/admin/login error', err.message);
+    failures++;
+  }
+
+  // 12. POST /api/admin/login -> Reject wrong password
+  try {
+    const res = await makeRequest('/api/admin/login', 'POST', {
+      username: 'M.Linga@123',
+      password: 'wrong_password_999'
+    });
+    if (res.status === 401) {
+      console.log('✓ POST /api/admin/login (invalid password) -> 401 Unauthorized (Security verified)');
+    } else {
+      console.error('✗ POST /api/admin/login security check failed', res.status);
+      failures++;
+    }
+  } catch (err) {
+    console.error('✗ POST /api/admin/login security test error', err.message);
+    failures++;
+  }
+
+  // 13. GET /api/admin/verify -> Verify active session
+  if (adminToken) {
+    try {
+      const res = await makeRequest('/api/admin/verify', 'GET', null, {
+        'Authorization': `Bearer ${adminToken}`
+      });
+      const json = JSON.parse(res.body);
+      if (res.status === 200 && json.authenticated && json.user.name === 'M. Linga') {
+        console.log('✓ GET /api/admin/verify -> 200 OK (Session verified for M. Linga)');
+      } else {
+        console.error('✗ GET /api/admin/verify failed', res.status, json);
+        failures++;
+      }
+    } catch (err) {
+      console.error('✗ GET /api/admin/verify error', err.message);
       failures++;
     }
   }
