@@ -622,6 +622,20 @@ const server = http.createServer(async (req, res) => {
   // --------------------------------------------------------------------------
 
   if (method === 'GET') {
+    // 301 Permanent Redirect for legacy .php links to prevent 404s in Google Search Console
+    const legacyRedirects = {
+      '/services.php': '/#services',
+      '/products.php': '/#products',
+      '/areas.php': '/#areas',
+      '/about.php': '/#about',
+      '/contact.php': '/#contact',
+      '/privacy.php': '/#contact'
+    };
+    if (legacyRedirects[pathname]) {
+      res.writeHead(301, { 'Location': legacyRedirects[pathname] });
+      return res.end();
+    }
+
     let reqPath = pathname;
     if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
     if (reqPath === '/admin' || reqPath === '/admin/') reqPath = '/admin.html';
