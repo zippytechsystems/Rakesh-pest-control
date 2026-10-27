@@ -1,0 +1,59 @@
+# =====================================================================
+# Harsha Pest Control - Hostinger Apache / LiteSpeed Configuration
+# =====================================================================
+
+# 1. Prevent Directory Indexing (Security)
+Options -Indexes
+
+# 2. Block Direct Access to Sensitive Files and Directories
+<FilesMatch "^(config\.php|config\.example\.php|schema\.sql|\.env|\.git.*|composer\..*)$">
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
+
+# Prevent access to includes folder directly
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Block direct URL access to includes folder
+    RewriteRule ^includes/ - [F,L]
+
+    # Clean URLs: Route clean paths to PHP pages or index.php
+    # e.g., /services -> services.php or index.php?page=services
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?page=$1 [L,QSA]
+</IfModule>
+
+# 3. Security HTTP Response Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# 4. Gzip / Deflate Compression for Speed (Core Web Vitals)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json image/svg+xml
+</IfModule>
+
+# 5. Browser Caching for Static Assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# 6. Custom 404 Error Page
+ErrorDocument 404 /404.php

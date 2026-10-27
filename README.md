@@ -1,157 +1,128 @@
-# Harsha Pest Control — Official Full-Stack Website & REST API
+# Harsha Pest Control — Production Website & Management System
+## Target Platform: Hostinger Web Hosting (PHP & MySQL/MariaDB)
 
-A complete, mobile-first, local-SEO-optimized web application with a lightweight Node.js REST API backend for **Harsha Pest Control**, a pest management and pest product business based in Nacharam, Hyderabad with 20 years of hands-on experience.
+A complete, production-ready, mobile-first website for **Harsha Pest Control**, serving residents and commercial property owners across **Nacharam, HMT Nagar, Snehapuri Colony, Habsiguda, Taranaka, and nearby Hyderabad areas**.
 
----
-
-## Confirmed Business Profile
-
-- **Business Name:** Harsha Pest Control
-- **Experience:** 20 Years of localized pest control experience
-- **Contact Person:** Rakesh
-- **Phone Numbers:**
-  - Primary / Direct Call: `+91 63052 35360`
-  - Alternative Contact: `+91 88979 06391`
-- **Physical Operating Base:** Snehapuri Colony, Behind HDFC Bank, Nacharam, Hyderabad – 500 076, Telangana, India
-- **Core Priority Service Areas (500 076):**
-  - **Nacharam (500 076)** — Operating headquarters & central dispatch
-  - **Snehapuri Colony (500 076)** — Immediate neighborhood base behind HDFC Bank
-  - **HMT Nagar & Babuji Nagar (500 076)** — Residential colony corridors
-  - **Habsiguda (500 076 / 500 007)** — Street No. 1 to 8 & Habsiguda X Roads
-  - **Tarnaka (500 076 / 500 017)** — University quarters, railway colony & residential sector
-- **Extended Neighboring Areas (Scheduled Visits):**
-  - Mallapur, Boduppal, Uppal, Mettuguda, Secunderabad, Chengicherla, Narapally, LB Nagar
+Built with a native PHP 8 backend, MySQL/MariaDB database, secure admin portal, anti-spam enquiry processing, and white-hat local SEO.
 
 ---
 
-## Local SEO & Search Architecture
+## 🏢 Confirmed Business Details (NAP Consistency)
 
-This website is designed specifically to maximize local relevance on Google Search and Google Maps for people in and around the 500076 cluster while adhering strictly to white-hat SEO practices:
+| Attribute | Verified Information |
+| :--- | :--- |
+| **Business Name** | Harsha Pest Control |
+| **Experience** | 20 Years of hands-on local field experience |
+| **Contact Person** | Rakesh |
+| **Primary Phone** | `63052 35360` (`+91 63052 35360`) |
+| **Secondary Phone** | `88979 06391` (`+91 88979 06391`) |
+| **Office Address** | Snehapuri Colony, Behind HDFC Bank, Nacharam, Hyderabad – 500 076, Telangana |
+| **Confirmed Service Areas** | HMT Nagar, Snehapuri Colony, Nacharam, Habsiguda, Taranaka, and nearby Hyderabad areas |
 
-1. **No Keyword Stuffing or Fake Claims:**  
-   Natural, informative copy grounded in real local pest situations (modular kitchen cockroaches, wardrobe termites, garden mosquitoes, cellar rodents). No fake reviews, doorway pages, or false guarantees of #1 search ranking.
-2. **Schema.org Structured Data (`LocalBusiness` & `PestControl`):**  
-   Valid JSON-LD metadata embedded in `index.html` detailing exact Name, Operating Address, Postal Code (`500076`), GeoCoordinates (`17.4325, 78.5583`), Phone numbers, Founder (`Rakesh`), and comprehensive `areaServed` locality list.
-3. **Crawlability & Indexability:**  
-   - `robots.txt`: Directs search engines to index canonical content while excluding private storage/API routes.
-   - `sitemap.xml`: Complete canonical XML sitemap pointing to `https://harshapestcontrol.in/`.
-   - `404.html`: Custom branded error recovery page with direct call buttons for Rakesh.
-   - Canonical URL tag: `<link rel="canonical" href="https://harshapestcontrol.in/">`.
-4. **Google Business Profile & Search Console Owner Guide:**  
-   Detailed step-by-step instructions for Rakesh in [`GOOGLE_SEO_GUIDE.md`](./GOOGLE_SEO_GUIDE.md), highlighting tasks requiring owner actions like profile verification, review requests, and sitemap submission.
+*Note: No fake reviews, invented opening hours, false certifications, or duplicate doorway locations are used.*
 
 ---
 
-## Navigation Structure
+## 🛠️ Technology Stack
 
-Both desktop (`#primary-nav`) and mobile (`#mobile-drawer`) navigation feature exact dedicated links:
-- **Home** (`#hero`)
-- **Pest Control Services** (`#services`)
-- **Pest Control Products** (`#products`)
-- **Areas We Serve** (`#areas`)
-- **About Us** (`#about`)
-- **Contact** (`#contact`)
+- **Server-Side Runtime:** PHP 8.0 / 8.1 / 8.2 / 8.3 (Standard on Hostinger Shared & Cloud Hosting).
+- **Database Engine:** MySQL 5.7+ / 8.0+ or MariaDB 10.3+ with `utf8mb4` encoding via PDO.
+- **Frontend Architecture:** Semantic HTML5, Vanilla CSS3 (Custom Responsive Design System), Vanilla JavaScript (No heavy frameworks for maximum Core Web Vitals speed).
+- **Web Server:** Apache / LiteSpeed with `.htaccess` security rules, Gzip compression, and clean URL rewrites.
+- **Admin Management:** Session-authenticated staff dashboard with CSRF protection, password hashing (`PASSWORD_DEFAULT`), and enquiry status tracking.
 
 ---
 
-## Pest Control Services & Indicative Offers
+## 📁 Repository & File Structure
 
-All service offers are derived from verified notes and clearly marked as indicative estimates subject to property inspection:
-
-1. **Cockroach Treatment:** 2 BHK Residential Flat — **₹1,500** | 2-Year Warranty | One Service Free (Gel baiting & crevice spray)
-2. **Termite Treatment:** 2 BHK Woodwork & Cupboards — **₹4,500** | 5-Year Warranty | One Service Free (Precision drill-and-inject barrier)
-3. **Mosquito Management:** Outdoor Garden / Shaded Cellar — **₹2,500** | 6-Month Warranty | One Service Free (Foliage barrier spray)
-4. **Rat & Rodent Treatment:** Garden, Ground Floor, or Apartment Cellar — **₹3,500** | 2-Year Warranty | One Service Free (Secured bait stations & traps)
-5. **Bed Bug Treatment:** Meticulous spot treatment for cot joints, mattress beading, and headboards
-6. **Spider Control:** Web clearance and perimeter barrier application for high ceilings and balconies
-
----
-
-## Pest Control Products Catalog (6 Products)
-
-Customers can order products online or call Rakesh directly:
-
-1. **Cockroach Gel** — **₹550** (Precision dot gel bait for kitchen cabinets)
-2. **Cockroach Spray Bottle** — **₹1,200** (Ready-to-use spray for pipes, gullies, and baseboards)
-3. **Rat Medicine** — **₹250** (Rodent control bait formulation for cellars and gardens)
-4. **Snake Medicine** — **₹1,800** (Reptile deterrent formulation for compound perimeters)
-5. **Termite Spray Bottle** — **₹2,000** (Specialized spray bottle for localized wooden cupboard care)
-6. **Lizard Medicine (Liquid Deterrent)** — **₹350** (Liquid repellent spray for walls, tube-light corners, and window frames)
-
-Each product card includes:
-- **Order Online** button with dynamic quantity stepper and live price calculator modal.
-- **Call to Order** button (`tel:+916305235360`) for immediate telephone order.
-- **WhatsApp Order** button with pre-filled message text.
-
----
-
-## File Structure
-
-```
-Rakesh pest control/
-├── assets/
-│   ├── favicon.svg          # Branded crimson shield favicon with Capital "H"
-│   ├── logo.svg             # High-res Capital "H" vector logo with security diamond & stars
-│   ├── hero.jpg             # Home inspection hero photo
-│   └── inspection.jpg       # Woodwork & skirting inspection photo
-├── data/
-│   ├── enquiries.json       # Persistent JSON storage for service inspection bookings
-│   └── orders.json          # Persistent JSON storage for product orders
-├── 404.html                 # Branded accessible custom 404 page
-├── data.js                  # Central business catalog (Services, Products, Local SEO Areas, Checklist)
-├── GOOGLE_SEO_GUIDE.md      # Owner setup guide for Google Business Profile & Search Console
-├── index.html               # Semantic HTML5 frontend with Schema.org JSON-LD & accessible modals
-├── package.json             # NPM package configuration & scripts
-├── README.md                # Master documentation
-├── robots.txt               # Search engine crawler directives
-├── script.js                # Frontend REST API integration, modals, calculators & tracker
-├── serve.js                 # Proxy entry point
-├── server.js                # Node.js REST API server + Static asset server (port 5173)
-├── sitemap.xml              # Canonical XML sitemap for Google Search Console
-├── styles.css               # WCAG AA compliant stylesheet with responsive local SEO grid
-└── test_endpoints.js        # Automated verification script testing all routes & REST endpoints
+```text
+├── .htaccess                     # Security headers, file blocks, Gzip compression, rewrite rules
+├── .gitignore                    # Prevents committing config.php, logs, and sensitive data
+├── config.example.php            # Secure configuration template with Hostinger placeholders
+├── schema.sql                    # Full MySQL/MariaDB schema + verified seed data
+├── setup.php                     # Secure one-time initial admin setup script (auto-locking)
+├── index.php                     # Main front controller & page dispatcher
+├── services.php                  # Dedicated Pest Control Services page
+├── products.php                  # Dedicated Pest Control Products catalog
+├── areas.php                     # Areas We Serve (local coverage guide)
+├── about.php                     # About Us & verified 20-year history
+├── contact.php                   # Contact page with interactive booking form & direct dial
+├── privacy.php                   # Customer data privacy notice
+├── submit-enquiry.php            # Validated backend endpoint for customer leads
+├── 404.php                       # Custom branded 404 error recovery page
+├── robots.txt                    # Search crawler rules (blocks /admin/ and private scripts)
+├── sitemap.xml                   # Canonical XML sitemap for Google Search Console
+│
+├── includes/                     # Private framework includes (protected from direct web access)
+│   ├── db.php                    # PDO connection manager with error handling
+│   ├── functions.php             # Core security helpers, sanitization, CSRF, rate-limiting
+│   ├── header.php                # Semantic HTML head, SEO meta tags, navigation
+│   └── footer.php                # Footer columns, sticky mobile action bar, JSON-LD schema
+│
+├── pages/                        # Individual page content templates
+│   ├── home.php                  # Home page layout with indicative pricing & services
+│   ├── services.php              # Comprehensive treatment breakdowns & warranties
+│   ├── products.php              # Product cards with Call to Order actions
+│   ├── areas.php                 # Local coverage and office distinction
+│   ├── about.php                 # Authentic background & Rakesh's experience
+│   ├── contact.php               # Contact cards & inspection form
+│   └── privacy.php               # Privacy details
+│
+├── admin/                        # Protected Staff Administration Portal (noindex)
+│   ├── admin-header.php          # Shared authenticated header & nav tabs
+│   ├── admin-footer.php          # Shared authenticated footer
+│   ├── index.php                 # Lead management dashboard (view & update status)
+│   ├── services.php              # CRUD manager for services, prices, and warranties
+│   ├── products.php              # CRUD manager for products, prices, and counter stock
+│   ├── settings.php              # Business details, WhatsApp number & SEO metadata
+│   ├── password.php              # Secure password change with verification
+│   ├── login.php                 # Rate-limited admin login with CSRF
+│   └── logout.php                # Clean session destruction
+│
+└── assets/                       # Static public assets
+    ├── css/
+    │   ├── style.css             # Main responsive stylesheet & design system
+    │   └── admin.css             # Admin dashboard styling
+    ├── js/
+    │   └── main.js               # Client validation, mobile menu, AJAX form handling
+    └── images/                   # Branded icons & verified photos
+        ├── logo.svg              # Custom Harsha Pest Control emblem
+        ├── favicon.svg           # High-DPI browser icon
+        ├── hero.jpg              # Professional pest inspection image
+        └── inspection.jpg        # Field application photo
 ```
 
 ---
 
-## REST API Endpoints
+## 🔒 Security Hardening Implemented
 
-The server runs on `http://localhost:5173/` and provides:
-
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/health` | Server uptime & status check |
-| `GET` | `/api/business` | Business details, 20-year experience profile, address, and phones |
-| `GET` | `/api/services` | List of 6 core pest control services |
-| `GET` | `/api/services/:id` | Single service details (e.g. `/api/services/termite`) |
-| `GET` | `/api/plans` | 4 indicative service pricing plans and warranty terms |
-| `GET` | `/api/products` | All 6 pest control products with pricing |
-| `GET` | `/api/products/:id` | Single product details (e.g. `/api/products/cockroach-gel`) |
-| `GET` | `/api/areas` | Local SEO coverage: 5 core localities & 8 extended areas |
-| `POST` | `/api/enquiries` | Submit service inspection enquiry & receive `ENQ-...` ID |
-| `GET` | `/api/enquiries` | List enquiries (filterable by status) |
-| `PATCH` | `/api/enquiries/:id`| Update enquiry status (`pending`, `contacted`, `inspected`, `completed`) |
-| `POST` | `/api/orders` | Place product order & receive `ORD-...` ID |
-| `GET` | `/api/orders` | List product orders |
-| `PATCH` | `/api/orders/:id` | Update order status (`pending`, `confirmed`, `dispatched`, `delivered`) |
-| `GET` | `/api/track/:id` | Unified reference ID tracking for customers |
-| `GET` | `/api/stats` | Dashboard KPIs (total enquiries, orders, estimated revenue) |
+1. **Prepared Statements with PDO:** SQL injection is eliminated across every enquiry insert, admin login, and content query.
+2. **Output Escaping:** All user-facing strings pass through `htmlspecialchars(..., ENT_QUOTES, 'UTF-8')` to prevent Cross-Site Scripting (XSS).
+3. **CSRF Tokens:** All form submissions (enquiries, admin login, service edits, settings updates, password change) require valid session-bound cryptographic tokens.
+4. **Honeypot Anti-Spam Trap:** Hidden `website_url` field catches automated spam bots without burdening real users with annoying CAPTCHAs.
+5. **Rate Limiting:** Form submissions and login attempts are strictly capped (max 5 attempts per 15-minute window per IP) to prevent spam flooding and brute-force attacks.
+6. **Password Hashing:** Passwords are encrypted using PHP's native `password_hash()` with `PASSWORD_DEFAULT` (Bcrypt/Argon2).
+7. **Session Security:** Cookies configured with `HttpOnly`, `SameSite=Lax`, strict mode, and session regeneration on privilege escalation.
+8. **Sensitive File Protection:** The `.htaccess` file explicitly returns `403 Forbidden` if anyone attempts to access `config.php`, `schema.sql`, `.env`, or the `includes/` directory.
 
 ---
 
-## Running & Testing
+## 🚀 Quick Deployment Summary for Hostinger
 
-### 1. Start Server
-```bash
-npm start
-# or: node server.js
-```
-The server will start on `http://localhost:5173/`.
+For full, beginner-friendly instructions, refer to [`HOSTINGER_DEPLOYMENT_GUIDE.md`](./HOSTINGER_DEPLOYMENT_GUIDE.md).
 
-### 2. Run Route & API Verification Tests
-```bash
-node test_endpoints.js
-```
+1. **Before Deployment Check:** If you see *"Domain suspended / Verify your email"*, sign into Hostinger hPanel directly, click **Domains**, and complete ICANN email verification.
+2. **Create Database:** In Hostinger hPanel -> **Databases** -> **Management**, create a MySQL database (e.g. `u123456789_harsha_db`) and user.
+3. **Import Database:** In phpMyAdmin, select your database -> click **Import** -> select [`schema.sql`](./schema.sql) -> click **Import**.
+4. **Configure Credentials:** Copy [`config.example.php`](./config.example.php) to `config.php` and enter your database name, user, password, and live domain.
+5. **Upload Files:** Upload all project files to Hostinger's `public_html` directory via File Manager or FTP.
+6. **Run First-Admin Setup:** Open `https://yourdomain.com/setup.php` in your browser, create your master admin account, and then **DELETE `setup.php`** from `public_html`.
+7. **Verify & Test:** Visit your site, test the phone links (`63052 35360`), submit an inspection request, and verify it in `/admin/`.
 
 ---
-*Developed for Harsha Pest Control — Snehapuri Colony, Behind HDFC Bank, Nacharam, Hyderabad 500 076.*
+
+## 📋 Essential Documentation Links
+
+- **Deployment Guide:** [`HOSTINGER_DEPLOYMENT_GUIDE.md`](./HOSTINGER_DEPLOYMENT_GUIDE.md) — Step-by-step setup, database import, file permissions, and backup/restore steps.
+- **Search Console & Google Business Profile:** [`SEO_SEARCH_CONSOLE_GUIDE.md`](./SEO_SEARCH_CONSOLE_GUIDE.md) — Step-by-step owner instructions for domain verification, sitemap submission, and Google Maps listing.
+- **Owner Launch Checklist:** [`OWNER_CONFIRMATION_CHECKLIST.md`](./OWNER_CONFIRMATION_CHECKLIST.md) — Price, warranty, product availability, and WhatsApp confirmation for Rakesh.

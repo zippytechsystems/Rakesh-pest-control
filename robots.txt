@@ -1,8 +1,21 @@
-# robots.txt for Harsha Pest Control (Nacharam, Hyderabad - 500076)
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /data/
+Allow: /services.php
+Allow: /products.php
+Allow: /areas.php
+Allow: /about.php
+Allow: /contact.php
+Allow: /privacy.php
+Allow: /assets/
 
-# Canonical XML Sitemap
-Sitemap: https://harshapestcontrol.in/sitemap.xml
+# Keep admin management and private endpoints out of public search results
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /setup.php
+Disallow: /config.php
+Disallow: /config.example.php
+Disallow: /schema.sql
+Disallow: /submit-enquiry.php
+
+# Sitemap index
+Sitemap: https://yourdomain.com/sitemap.xml
