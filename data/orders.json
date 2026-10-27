@@ -1,0 +1,53 @@
+[
+  {
+    "id": "ORD-20261027-055E",
+    "createdAt": "2026-10-27T10:50:38.681Z",
+    "customerName": "Srinivas Rao",
+    "phone": "6305235360",
+    "productId": "lizard-medicine",
+    "productName": "Lizard Medicine (Liquid Deterrent)",
+    "unitPrice": 350,
+    "priceDisplay": "₹350",
+    "quantity": 2,
+    "totalAmount": 700,
+    "totalAmountDisplay": "₹700",
+    "deliveryAddress": "Behind HDFC Bank, Nacharam",
+    "notes": "Please bring 2 bottles of liquid deterrent",
+    "status": "confirmed",
+    "vendorContact": "Rakesh - 63052 35360",
+    "pickupAddress": "Snehapuri Colony, Behind HDFC Bank, Nacharam, Hyderabad – 500 076",
+    "updatedAt": "2026-10-27T10:50:38.751Z"
+  },
+  {
+    "id": "ORD-20261027-64B1",
+    "createdAt": "2026-10-27T10:33:05.012Z",
+    "customerName": "Test Orderer",
+    "phone": "9876543210",
+    "productId": "cockroach-gel",
+    "productName": "Cockroach Gel",
+    "unitPrice": 550,
+    "priceDisplay": "₹550",
+    "quantity": 2,
+    "totalAmount": 1100,
+    "totalAmountDisplay": "₹1,100",
+    "deliveryAddress": "Near HDFC Bank, Nacharam",
+    "notes": "Urgent pickup",
+    "status": "pending",
+    "vendorContact": "Rakesh - 63052 35360",
+    "pickupAddress": "Snehapuri Colony, Behind HDFC Bank, Nacharam, Hyderabad – 500 076"
+  },
+  {
+    "id": "ORD-20261027-2001",
+    "createdAt": "2026-10-27T10:05:00.000Z",
+    "customerName": "Local Resident (Nacharam)",
+    "phone": "6305235360",
+    "productId": "cockroach-gel",
+    "productName": "Cockroach Gel",
+    "unitPrice": 550,
+    "quantity": 1,
+    "totalAmount": 550,
+    "deliveryAddress": "Near HDFC Bank, Nacharam, Hyderabad",
+    "notes": "Direct pickup requested",
+    "status": "pending"
+  }
+]

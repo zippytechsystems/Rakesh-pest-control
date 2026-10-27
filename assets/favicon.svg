@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="favShieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B91C1C"/>
+      <stop offset="50%" stop-color="#881416"/>
+      <stop offset="100%" stop-color="#580A0C"/>
+    </linearGradient>
+    <linearGradient id="favGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="favHGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F1F5F9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Protective Shield Base -->
+  <path d="M50 4 C74 4 89 13 91 21 C91 58 71 83 50 96 C29 83 9 58 9 21 C11 13 26 4 50 4 Z" 
+        fill="url(#favShieldGrad)" 
+        stroke="#FFFFFF" 
+        stroke-width="3"/>
+
+  <!-- Inner Gold Border -->
+  <path d="M50 9 C69 9 82 16 84 23 C84 53 67 75 50 87 C33 75 16 53 16 23 C18 16 31 9 50 9 Z" 
+        fill="none" 
+        stroke="url(#favGoldGrad)" 
+        stroke-width="1.8"/>
+
+  <!-- Stylized Capital H Emblem -->
+  <!-- Left Pillar -->
+  <path d="M28 24 L38 21 V44 H44 V52 H38 V73 L28 70 Z" fill="url(#favHGrad)"/>
+
+  <!-- Right Pillar -->
+  <path d="M62 21 L72 24 V70 L62 73 V52 H56 V44 H62 Z" fill="url(#favHGrad)"/>
+
+  <!-- Bridge -->
+  <path d="M42 44 H58 V52 H42 Z" fill="url(#favHGrad)"/>
+
+  <!-- Center Security Diamond & Star -->
+  <path d="M50 39 L57 48 L50 57 L43 48 Z" fill="#22C55E" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="50" cy="48" r="2" fill="#FFFFFF"/>
+  <circle cx="50" cy="80" r="3.5" fill="url(#favGoldGrad)"/>
+</svg>

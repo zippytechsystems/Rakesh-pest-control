@@ -1,0 +1,18 @@
+{
+  "name": "harsha-pest-control-website",
+  "version": "1.0.0",
+  "description": "Mobile-first frontend website for Harsha Pest Control, Nacharam, Hyderabad.",
+  "main": "serve.js",
+  "scripts": {
+    "start": "node serve.js",
+    "dev": "node serve.js"
+  },
+  "keywords": [
+    "pest-control",
+    "nacharam",
+    "hyderabad",
+    "harsha-pest-control"
+  ],
+  "author": "Harsha Pest Control",
+  "license": "ISC"
+}
